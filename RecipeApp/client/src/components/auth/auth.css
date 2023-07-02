@@ -1,0 +1,20 @@
+.authPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px
+}
+
+.passwordAndResetContainer {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

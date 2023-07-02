@@ -4,15 +4,13 @@ require("dotenv").config({
 
 const express = require("express");
 const authRoutes = express.Router();
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Users = require("../models/users-models");
 
 //gets user that sent jwt token in header by authorization
 authRoutes.get("/user", (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
-    const accessToken = authHeader.split(" ")[1];
+    const accessToken = authHeader && authHeader.split(" ")[1];
     jwt.verify(
       accessToken,
       process.env.ACCESS_TOKEN_SECRET,
@@ -27,7 +25,5 @@ authRoutes.get("/user", (req, res) => {
     res.status(500).json({ errorMessage: error.message });
   }
 });
-
-authRoutes.post("/", (req, res) => {});
 
 module.exports = authRoutes;
