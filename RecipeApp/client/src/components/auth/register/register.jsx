@@ -47,9 +47,7 @@ export default function Register() {
           Login
         </button>
         <h2>
-          {!successMessage
-            ? "Register user using above fields"
-            : successMessage}
+          {!successMessage ? "Register user with above fields" : successMessage}
         </h2>
       </div>
     </div>
