@@ -8,6 +8,6 @@ app.use(cors());
 
 app.use("/users", usersRoutes);
 
-app.listen(4000, () => {
+app.listen(5000, () => {
   console.log("SERVER IS UP AND RUNNING");
 });
