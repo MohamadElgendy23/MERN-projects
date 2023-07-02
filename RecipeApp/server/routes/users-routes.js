@@ -44,7 +44,9 @@ usersRoutes.post("/login/", async (req, res) => {
         { userId: userExists._id },
         process.env.ACCESS_TOKEN_SECRET
       );
-      res.status(201).json({ accessToken: accessToken });
+      res
+        .status(201)
+        .json({ accessToken: accessToken, userID: userExists._id });
     });
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
