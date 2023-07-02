@@ -1,5 +1,5 @@
 MERN Stack Projects:
 
-With user authentication:
+With user authentication using jwt tokens:
 
 1. RecipeApp
