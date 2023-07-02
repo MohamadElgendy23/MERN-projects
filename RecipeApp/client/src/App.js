@@ -1,7 +1,8 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/home/home";
-import Auth from "./components/auth/auth";
+import Register from "./components/auth/register/register";
+import Login from "./components/auth/login/login";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home></Home>} />
-          <Route path="/auth" element={<Auth></Auth>}></Route>
+          <Route path="/register/" element={<Register></Register>}></Route>
+          <Route path="/login/" element={<Login></Login>}></Route>
         </Routes>
       </Router>
     </div>

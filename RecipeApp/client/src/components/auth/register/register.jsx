@@ -1,17 +1,20 @@
-import "./auth.css";
+import "./register.css";
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const baseURL = "http://localhost:4000/users/register/";
 
-export default function Auth() {
+export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div className="authPageContainer">
       <h1>User Registration</h1>
-      <div className="formContainer" onSubmit={handleUserRegistration}>
+      <div className="formContainer">
         <label htmlFor="usernameLabel">Username: </label>
         <input
           id="usernameLabel"
@@ -34,7 +37,20 @@ export default function Auth() {
             X
           </button>
         </div>
-        <button disabled={!username || !password}>Register</button>
+        <button
+          onClick={handleUserRegistration}
+          disabled={!username || !password}
+        >
+          Register
+        </button>
+        <button onClick={() => navigate("/login/")} disabled={!successMessage}>
+          Login
+        </button>
+        <h2>
+          {!successMessage
+            ? "Register user using above fields"
+            : successMessage}
+        </h2>
       </div>
     </div>
   );
@@ -47,7 +63,7 @@ export default function Auth() {
           password: password,
         })
         .then(() => {
-          console.log("User created successfully");
+          setSuccessMessage("User registered successfully!");
         });
     } catch (error) {
       console.log(error.message);
