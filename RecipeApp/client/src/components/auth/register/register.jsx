@@ -46,9 +46,7 @@ export default function Register() {
         <button onClick={() => navigate("/login/")} disabled={!successMessage}>
           Login
         </button>
-        <h2>
-          {!successMessage ? "Register user with above fields" : successMessage}
-        </h2>
+        <h2>{successMessage || "Register user with above fields"}</h2>
       </div>
     </div>
   );
