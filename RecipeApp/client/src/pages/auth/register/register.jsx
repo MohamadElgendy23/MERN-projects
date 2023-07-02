@@ -37,15 +37,8 @@ export default function Register() {
             X
           </button>
         </div>
-        <button
-          onClick={handleUserRegistration}
-          disabled={!username || !password}
-        >
-          Register
-        </button>
-        <button onClick={() => navigate("/login/")} disabled={!successMessage}>
-          Login
-        </button>
+        <button onClick={handleUserRegistration}>Register</button>
+        <button onClick={() => navigate("/login/")}>Login</button>
         <h2>{successMessage || "Register user with above fields"}</h2>
       </div>
     </div>

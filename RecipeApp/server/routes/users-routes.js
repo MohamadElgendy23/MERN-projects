@@ -16,6 +16,9 @@ usersRoutes.post("/register/", async (req, res) => {
     if (userExists) {
       return res.status(409).json({ errorMessage: "User already exists!" });
     }
+    if (!password.length) {
+      return res.status(403).json({ errorMessage: "Password cannot be empty" });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new Users({ username: username, password: hashedPassword });
     newUser.save();
