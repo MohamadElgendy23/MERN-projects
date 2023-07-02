@@ -17,13 +17,15 @@ usersRoutes.post("/register/", async (req, res) => {
       return res.status(409).json({ errorMessage: "User already exists!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await Users.create({ username, hashedPassword });
+    const newUser = new Users({ username: username, password: hashedPassword });
+    newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
 });
 
+//login user then create access token
 usersRoutes.post("/login/", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -31,13 +33,15 @@ usersRoutes.post("/login/", async (req, res) => {
     if (!userExists) {
       return res.status(401).json({ errorMessage: "User not found!" });
     }
-    const user = userExists;
-    bcrypt.compare(password, user.password, (err, verifiedUser) => {
+    bcrypt.compare(password, userExists.password, (err, passwordMatched) => {
       if (err) {
-        return res.status(403).json({ errorMessage: err });
+        return res.status(403).json({ errorMessage: err.message });
+      }
+      if (!passwordMatched) {
+        return res.status(400).json({ msg: "Passwords dont match" });
       }
       const accessToken = jwt.sign(
-        { username: verifiedUser.username, password: verifiedUser.password },
+        { userId: userExists._id },
         process.env.ACCESS_TOKEN_SECRET
       );
       res.status(201).json({ accessToken: accessToken });
@@ -47,6 +51,7 @@ usersRoutes.post("/login/", async (req, res) => {
   }
 });
 
+//logout user
 usersRoutes.post("/logout/", async (req, res) => {
   res.status(204).json({ msg: "Successfully logged out!" });
 });
