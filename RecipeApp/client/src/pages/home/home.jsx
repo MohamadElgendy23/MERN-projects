@@ -13,7 +13,9 @@ export default function Home() {
   useEffect(() => {
     async function getUserRecipes() {
       try {
-        const userRecipesRes = await axios.get(baseURL);
+        const userRecipesRes = await axios.get(baseURL, {
+          headers: { authorization: `Bearer ${cookies.accessToken}` },
+        });
         setRecipes(userRecipesRes.data);
       } catch (error) {
         console.log(error.message);

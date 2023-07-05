@@ -9,7 +9,7 @@ const Recipes = require("../models/recipes-models");
 const Users = require("../models/users-models");
 
 //get all recipes
-recipesRoutes.get("/", async (req, res) => {
+recipesRoutes.get("/", authorizeUser, async (req, res) => {
   try {
     const currentRecipes = await Recipes.find({});
     res.status(200).json(currentRecipes);

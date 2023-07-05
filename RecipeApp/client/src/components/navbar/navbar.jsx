@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 export default function NavBar() {
-  const [cookies, removeCookies] = useCookies(["accessToken"]);
+  const [cookies, setCookies] = useCookies(["accessToken"]);
   return (
     <div className="navbarComponentContainer">
       <ul className="navbarList">
@@ -41,7 +41,7 @@ export default function NavBar() {
   );
 
   function handleUserRemove() {
-    removeCookies("accessToken");
+    setCookies("accessToken", "");
     window.localStorage.removeItem("userId");
   }
 }
