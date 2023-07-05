@@ -11,10 +11,18 @@ export default function NavBar() {
           <Link to="/"> Home</Link>
         </li>
         <li>
-          <Link to="/create-recipe/"> Create Recipe</Link>
+          {cookies.accessToken ? (
+            <Link to="/create-recipe/"> Create Recipe</Link>
+          ) : (
+            <Link to="/"> Create Recipe</Link>
+          )}
         </li>
         <li>
-          <Link to="/saved-recipes/"> Saved Recipes</Link>
+          {cookies.accessToken ? (
+            <Link to="/saved-recipes/"> Saved Recipes</Link>
+          ) : (
+            <Link to="/"> Saved Recipes</Link>
+          )}
         </li>
         <li>
           <Link to="/register/"> Register</Link>
@@ -22,7 +30,6 @@ export default function NavBar() {
         <li>
           {cookies.accessToken ? (
             <Link to="/register" onClick={handleUserRemove}>
-              {" "}
               Logout
             </Link>
           ) : (
