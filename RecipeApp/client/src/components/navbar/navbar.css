@@ -1,3 +1,9 @@
+.navbarComponentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .navbarList {
     list-style-type: none;
     margin: 0;

@@ -19,7 +19,7 @@ recipesRoutes.get("/", async (req, res) => {
 });
 
 //create new recipe
-recipesRoutes.post("/", async (req, res) => {
+recipesRoutes.post("/", authorizeUser, async (req, res) => {
   try {
     const newRecipe = new Recipes(req.body);
     await newRecipe.save();
@@ -29,7 +29,7 @@ recipesRoutes.post("/", async (req, res) => {
   }
 });
 
-recipesRoutes.put("/", async (req, res) => {
+recipesRoutes.put("/", authorizeUser, async (req, res) => {
   try {
     const { recipeId, userId } = req.body;
     const requestingUser = await Users.findById(userId);
@@ -42,19 +42,9 @@ recipesRoutes.put("/", async (req, res) => {
   }
 });
 
-recipesRoutes.get("/savedRecipes/ids", async (req, res) => {
+recipesRoutes.get("/savedRecipes/:userId", authorizeUser, async (req, res) => {
   try {
-    const { userId } = req.body;
-    const requestingUser = await Users.findById(userId);
-    res.status(200).json({ savedRecipes: requestingUser?.savedRecipes });
-  } catch (error) {
-    res.status(500).json({ messageError: error.message });
-  }
-});
-
-recipesRoutes.get("/savedRecipes/", async (req, res) => {
-  try {
-    const { userId } = req.body;
+    const userId = req.params.userId;
     const requestingUser = await Users.findById(userId);
     const savedRecipes = await Recipes.find({
       _id: { $in: requestingUser.savedRecipes },
@@ -65,16 +55,20 @@ recipesRoutes.get("/savedRecipes/", async (req, res) => {
   }
 });
 
-//authorize user each request based on token passed in to request header (Bearer token)
+//middleware; authorize user each request based on token passed in to request header (Bearer token)
 function authorizeUser(req, res, next) {
   const authHeader = req.headers["authorization"];
   const accessToken = authHeader && authHeader.split(" ")[1];
-  jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err) => {
-    if (err) {
-      return res.status(403).json({ errorMessage: err.message });
-    }
-    next();
-  });
+  if (accessToken) {
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err) => {
+      if (err) {
+        return res.status(403).json({ errorMessage: err.message });
+      }
+      next();
+    });
+  } else {
+    res.status(401).json({ errorMessage: "No access token" });
+  }
 }
 
 module.exports = recipesRoutes;

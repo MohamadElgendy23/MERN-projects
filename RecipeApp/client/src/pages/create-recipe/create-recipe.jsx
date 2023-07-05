@@ -1,7 +1,9 @@
 import "./create-recipe.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import axios from "axios";
+import NavBar from "../../components/navbar/navbar";
 
 const baseURL = "http://localhost:4000/recipes/";
 
@@ -15,11 +17,13 @@ export default function CreateRecipe() {
     userId: window.localStorage.getItem("userId"),
   });
   const [successMessage, setSuccessMessage] = useState("");
+  const [cookies] = useCookies(["accessToken"]);
 
   const navigate = useNavigate();
 
   return (
     <div className="createRecipePageContainer">
+      <NavBar></NavBar>
       <h2>Create Recipe</h2>
       <div className="createFormContainer">
         <label htmlFor="name">Name</label>
@@ -86,14 +90,22 @@ export default function CreateRecipe() {
 
   async function handleCreateRecipe() {
     try {
-      await axios.post(baseURL, {
-        name: recipe.name,
-        ingredients: recipe.ingredients,
-        instructions: recipe.instructions,
-        imageUrl: recipe.imageUrl,
-        cookingTime: recipe.cookingTime,
-        userId: recipe.userId,
-      });
+      await axios.post(
+        baseURL,
+        {
+          name: recipe.name,
+          ingredients: recipe.ingredients,
+          instructions: recipe.instructions,
+          imageUrl: recipe.imageUrl,
+          cookingTime: recipe.cookingTime,
+          userId: recipe.userId,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${cookies.accessToken}`,
+          },
+        }
+      );
       setSuccessMessage("Recipe created successfully");
       setTimeout(() => navigate("/"), 1000);
     } catch (error) {

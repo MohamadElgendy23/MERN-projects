@@ -38,7 +38,7 @@ export default function Register() {
           </button>
         </div>
         <button onClick={handleUserRegistration}>Register</button>
-        <label htmlFor="loginButton">Already registered?</label>
+        <label htmlFor="loginButton">Already have an account?</label>
         <button id="loginButton" onClick={() => navigate("/login/")}>
           Login
         </button>
@@ -54,6 +54,7 @@ export default function Register() {
         password,
       });
       setSuccessMessage(`User ${username} registered successfully`);
+      setTimeout(() => navigate("/login/", 1000));
     } catch (error) {
       console.log(error.message);
     }

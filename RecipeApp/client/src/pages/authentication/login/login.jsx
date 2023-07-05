@@ -40,6 +40,10 @@ export default function Login() {
           </button>
         </div>
         <button onClick={handleUserLogin}>Login</button>
+        <label htmlFor="registerButton">Don't have an account?</label>
+        <button id="registerButton" onClick={() => navigate("/register/")}>
+          Register
+        </button>
         <h2>{successMessage || "Login user with above fields"}</h2>
       </div>
     </div>

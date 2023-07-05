@@ -1,6 +1,14 @@
-.homePageContainer {
+.displayRecipesContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.singleRecipeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
 }
