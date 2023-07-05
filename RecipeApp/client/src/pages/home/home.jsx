@@ -1,6 +1,22 @@
-import React from "react";
 import "./home.css";
+import React from "react";
+import NavBar from "../../components/navbar/navbar";
+
+const baseURL = "http://localhost:4000/recipes/";
 
 export default function Home() {
-  return <div className="homePageContainer">Home</div>;
+  const [recipes, setRecipes] = useState({});
+
+  useEffect(() => {
+    async function getUserRecipes() {
+      await axios;
+    }
+    getUserRecipes();
+  }, []);
+  return (
+    <>
+      <NavBar></NavBar>
+      <div className="displayRecipesContainer">{}</div>
+    </>
+  );
 }

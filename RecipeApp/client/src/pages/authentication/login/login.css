@@ -1,0 +1,25 @@
+.loginPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginPageContainer > h1 {
+    font-family: fantasy;
+}
+
+.formContainer {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px
+}
+
+.passwordAndResetContainer {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+

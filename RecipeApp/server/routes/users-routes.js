@@ -14,13 +14,15 @@ usersRoutes.post("/register/", async (req, res) => {
     const { username, password } = req.body;
     const userExists = await Users.findOne({ username });
     if (userExists) {
-      return res.status(409).json({ errorMessage: "User already exists!" });
+      return res.status(409).json({
+        errorMessage: `User with username ${username} already exists!`,
+      });
     }
     if (!password.length) {
       return res.status(403).json({ errorMessage: "Password cannot be empty" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new Users({ username: username, password: hashedPassword });
+    const newUser = new Users({ username, hashedPassword });
     newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
@@ -49,16 +51,10 @@ usersRoutes.post("/login/", async (req, res) => {
       );
       res
         .status(201)
-        .json({ accessToken: accessToken, userID: userExists._id });
+        .json({ accessToken: accessToken, userId: userExists._id });
     });
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
   }
 });
-
-//logout user
-usersRoutes.post("/logout/", async (req, res) => {
-  res.status(204).json({ msg: "Successfully logged out!" });
-});
-
 module.exports = usersRoutes;

@@ -1,9 +1,9 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const app = express();
 const usersRoutes = require("./routes/users-routes");
-const authRoutes = require("./routes/auth-routes");
+const recipesRoutes = require("./routes/recipes-routes");
 
 app.use(express.json());
 app.use(
@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGODB_CONN_STRING).then(() => {
 });
 
 app.use("/users", usersRoutes);
-app.use("/auth", authRoutes);
+app.use("/recipes", recipesRoutes);
 
 app.listen(4000, () => {
   console.log("SERVER IS UP AND RUNNING");

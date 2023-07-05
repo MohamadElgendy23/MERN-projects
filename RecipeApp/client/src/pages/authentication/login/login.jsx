@@ -1,19 +1,21 @@
-import "./register.css";
+import "./login.css";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
-const baseURL = "http://localhost:4000/users/register/";
+const baseURL = "http://localhost:4000/users/login/";
 
-export default function Register() {
+export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [, setCookies] = useCookies(["accessToken"]);
   const navigate = useNavigate();
 
   return (
-    <div className="authPageContainer">
-      <h1>User Registration</h1>
+    <div className="loginPageContainer">
+      <h1>User Login</h1>
       <div className="formContainer">
         <label htmlFor="usernameLabel">Username: </label>
         <input
@@ -37,23 +39,22 @@ export default function Register() {
             X
           </button>
         </div>
-        <button onClick={handleUserRegistration}>Register</button>
-        <button onClick={() => navigate("/login/")}>Login</button>
-        <h2>{successMessage || "Register user with above fields"}</h2>
+        <button onClick={handleUserLogin}>Login</button>
+        <h2>{successMessage || "Login user with above fields"}</h2>
       </div>
     </div>
   );
 
-  function handleUserRegistration() {
+  async function handleUserLogin() {
     try {
-      axios
-        .post(baseURL, {
-          username: username,
-          password: password,
-        })
-        .then(() => {
-          setSuccessMessage("User registered successfully!");
-        });
+      const accessTokenObj = await axios.post(baseURL, {
+        username,
+        password,
+      });
+      setCookies("accessToken", accessTokenObj.data.accessToken);
+      window.localStorage.setItem("userId", accessTokenObj.data.userId);
+      setSuccessMessage(`User ${username} logged in successfully`);
+      setTimeout(() => navigate("/"), 1000);
     } catch (error) {
       console.log(error.message);
     }

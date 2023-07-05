@@ -1,0 +1,18 @@
+.navbarList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #3abdbf;
+}
+
+.navbarList > li {
+    float:left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+}
+
+.navbarList > li :hover {
+    background-color: #69a478;
+}

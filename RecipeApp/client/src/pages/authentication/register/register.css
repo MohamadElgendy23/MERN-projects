@@ -1,11 +1,11 @@
-.authPageContainer {
+.registerPageContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.authPageContainer > h1 {
+.registerPageContainer > h1 {
     font-family: fantasy;
 }
 

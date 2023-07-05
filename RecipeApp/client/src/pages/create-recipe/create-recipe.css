@@ -1,0 +1,18 @@
+.createRecipePageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.createFormContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.createFormContainer > input, textarea{
+    text-align: center;
+}
