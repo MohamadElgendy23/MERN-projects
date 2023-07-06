@@ -42,18 +42,34 @@ recipesRoutes.put("/", authorizeUser, async (req, res) => {
   }
 });
 
+//gets the array of saved recipes objects
 recipesRoutes.get("/savedRecipes/:userId", authorizeUser, async (req, res) => {
   try {
     const userId = req.params.userId;
     const requestingUser = await Users.findById(userId);
     const savedRecipes = await Recipes.find({
-      _id: { $in: requestingUser.savedRecipes },
+      _id: { $in: requestingUser?.savedRecipes },
     });
     res.status(200).json({ savedRecipes });
   } catch (error) {
     res.status(500).json({ messageError: error.message });
   }
 });
+
+//gets the actual saved recipes array (saved recipe ids)
+recipesRoutes.get(
+  "/savedRecipes/ids:userId",
+  authorizeUser,
+  async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const requestingUser = await Users.findById(userId);
+      res.status(200).json({ savedRecipes: requestingUser?.savedRecipes });
+    } catch (error) {
+      res.status(500).json({ messageError: error.message });
+    }
+  }
+);
 
 //middleware; authorize user each request based on token passed in to request header (Bearer token)
 function authorizeUser(req, res, next) {

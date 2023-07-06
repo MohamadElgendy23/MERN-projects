@@ -21,6 +21,7 @@ export default function SavedRecipes() {
           },
         });
         setSavedRecipes(userSavedRecipesRes.data.savedRecipes);
+        console.log(userSavedRecipesRes.data.savedRecipes);
       } catch (error) {
         console.log(error.message);
       }
