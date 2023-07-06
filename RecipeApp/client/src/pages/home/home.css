@@ -1,4 +1,11 @@
-.displayRecipesContainer {
+.homePageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipesContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,5 +17,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    list-style: none;
 }
+
+.ingredientsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
