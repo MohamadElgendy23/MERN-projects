@@ -1,6 +1,4 @@
-require("dotenv").config({
-  path: "/Users/mohamadelgendy/Desktop/MERN projects/RecipeApp/server/jwt-secret/.env",
-});
+require("dotenv").config();
 
 const express = require("express");
 const recipesRoutes = express.Router();
@@ -14,7 +12,7 @@ recipesRoutes.get("/", authorizeUser, async (req, res) => {
     const currentRecipes = await Recipes.find({});
     res.status(200).json(currentRecipes);
   } catch (error) {
-    res.status(500).json({ messageError: error.message });
+    res.status(500).json({ errorMessage: error.message });
   }
 });
 
@@ -25,10 +23,28 @@ recipesRoutes.post("/", authorizeUser, async (req, res) => {
     await newRecipe.save();
     res.status(201).json(newRecipe);
   } catch (error) {
-    res.status(500).json({ messageError: error.message });
+    res.status(500).json({ errorMessage: error.message });
   }
 });
 
+//delete a recipe
+recipesRoutes.delete("/delete/:recipeId", authorizeUser, async (req, res) => {
+  try {
+    const recipeId = req.body.params;
+    const deletedRecipe = await Recipes.findOneAndDelete({ recipeId });
+    if (!deletedRecipe) {
+      return res.status(404).json({
+        errorMessage: `Recipe with id ${recipeId} doesn't exist. Cannot delete`,
+      });
+    }
+    const newRecipes = await Recipes.find({});
+    res.status(200).json(newRecipes);
+  } catch (error) {
+    res.status(500).json({ errorMessage: error.message });
+  }
+});
+
+//save a recipe
 recipesRoutes.put("/", authorizeUser, async (req, res) => {
   try {
     const { recipeId, userId } = req.body;
@@ -38,12 +54,12 @@ recipesRoutes.put("/", authorizeUser, async (req, res) => {
     await requestingUser?.save();
     res.status(200).json({ savedRecipes: requestingUser?.savedRecipes });
   } catch (error) {
-    res.status(500).json({ messageError: error.message });
+    res.status(500).json({ errorMessage: error.message });
   }
 });
 
 //gets the array of saved recipes objects
-recipesRoutes.get("/savedRecipes/:userId", authorizeUser, async (req, res) => {
+recipesRoutes.get("/savedRecipes/:userId/", authorizeUser, async (req, res) => {
   try {
     const userId = req.params.userId;
     const requestingUser = await Users.findById(userId);
@@ -52,13 +68,13 @@ recipesRoutes.get("/savedRecipes/:userId", authorizeUser, async (req, res) => {
     });
     res.status(200).json({ savedRecipes });
   } catch (error) {
-    res.status(500).json({ messageError: error.message });
+    res.status(500).json({ errorMessage: error.message });
   }
 });
 
 //gets the actual saved recipes array (saved recipe ids)
 recipesRoutes.get(
-  "/savedRecipes/ids:userId",
+  "/savedRecipes/ids/:userId/",
   authorizeUser,
   async (req, res) => {
     try {
@@ -66,7 +82,7 @@ recipesRoutes.get(
       const requestingUser = await Users.findById(userId);
       res.status(200).json({ savedRecipes: requestingUser?.savedRecipes });
     } catch (error) {
-      res.status(500).json({ messageError: error.message });
+      res.status(500).json({ errorMessage: error.message });
     }
   }
 );

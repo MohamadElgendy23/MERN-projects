@@ -1,6 +1,4 @@
-require("dotenv").config({
-  path: "/Users/mohamadelgendy/Desktop/MERN projects/RecipeApp/server/jwt-secret/.env",
-});
+require("dotenv").config();
 
 const express = require("express");
 const usersRoutes = express.Router();

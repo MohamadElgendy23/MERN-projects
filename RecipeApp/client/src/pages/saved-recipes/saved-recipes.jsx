@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import NavBar from "../../components/navbar/navbar";
 import axios from "axios";
 
-const baseURL = `http://localhost:4000/recipes/savedRecipes/${window.localStorage.getItem(
+const baseURLGet = `http://localhost:4000/recipes/savedRecipes/${localStorage.getItem(
   "userId"
 )}`;
 
@@ -15,13 +15,12 @@ export default function SavedRecipes() {
   useEffect(() => {
     async function getUserSavedRecipes() {
       try {
-        const userSavedRecipesRes = await axios.get(baseURL, {
+        const userSavedRecipesRes = await axios.get(baseURLGet, {
           headers: {
             authorization: `Bearer ${cookies.accessToken}`,
           },
         });
         setSavedRecipes(userSavedRecipesRes.data.savedRecipes);
-        console.log(userSavedRecipesRes.data.savedRecipes);
       } catch (error) {
         console.log(error.message);
       }
@@ -36,6 +35,7 @@ export default function SavedRecipes() {
         {savedRecipes.map((recipe) => {
           return (
             <div className="singleRecipeContainer" key={recipe._id}>
+              <br />
               <h2>Name: {recipe.name}</h2>
               <div className="ingredientsContainer">
                 {recipe.ingredients.map((ingredient, index) => {

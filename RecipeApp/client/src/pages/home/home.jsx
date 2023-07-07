@@ -6,7 +6,9 @@ import axios from "axios";
 
 const baseURLGet = "http://localhost:4000/recipes/";
 const baseURLPut = "http://localhost:4000/recipes/";
-const baseURLIds = "http://localhost:4000/savedRecipes/ids:userId";
+const baseURLIds = `http://localhost:4000/recipes/savedRecipes/ids/${localStorage.getItem(
+  "userId"
+)}`;
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -45,24 +47,33 @@ export default function Home() {
   return (
     <div className="homePageContainer">
       <NavBar></NavBar>
-      <h1>Recipes</h1>
+      <h1>Welcome to Recipes App!</h1>
+      <h2>{recipes.length ? "Recipes" : "No Recipes To Display"}</h2>
       <div className="recipesContainer">
         {recipes.map((recipe) => {
           return (
-            <div className="singleRecipeContainer" key={recipe._id} i>
-              <button
-                onClick={(event) => saveRecipe(event, recipe._id)}
-                disabled={isSavedRecipe(recipe._id)}
-              >
-                {isSavedRecipe(recipe._id) ? "Saved" : "Save"}
-              </button>
+            <div className="singleRecipeContainer" key={recipe._id}>
+              <br />
+              <div className="saveAndDeleteContainer">
+                <button
+                  onClick={(event) => saveRecipe(event, recipe._id)}
+                  disabled={savedRecipes.includes(recipe._id)}
+                >
+                  {savedRecipes.includes(recipe._id)
+                    ? "Recipe Saved"
+                    : "Save Recipe"}
+                </button>
+                <button onClick={() => deleteRecipe(recipe._id)}>
+                  Delete Recipe
+                </button>
+              </div>
               <h2>Name: {recipe.name}</h2>
               <div className="ingredientsContainer">
                 {recipe.ingredients.map((ingredient, index) => {
                   return (
                     <div key={index}>
                       <p>
-                        Ingredient {index + 1}: {ingredient}{" "}
+                        Ingredient {index + 1}: {ingredient}
                       </p>
                     </div>
                   );
@@ -78,8 +89,18 @@ export default function Home() {
     </div>
   );
 
-  async function isSavedRecipe(recipeId) {
-    return savedRecipes.includes(recipeId);
+  async function deleteRecipe(recipeId) {
+    const baseURLDelete = `http://localhost:4000/recipes/delete/${recipeId.toString()}`;
+    try {
+      const deleteRecipeRes = await axios.delete(baseURLDelete, {
+        headers: {
+          authorization: `Bearer ${cookies.accessToken}`,
+        },
+      });
+      setRecipes(deleteRecipeRes.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   async function saveRecipe(event, recipeId) {
@@ -88,7 +109,7 @@ export default function Home() {
         baseURLPut,
         {
           recipeId,
-          userId: window.localStorage.getItem("userId"),
+          userId: localStorage.getItem("userId"),
         },
         {
           headers: {
@@ -96,6 +117,7 @@ export default function Home() {
           },
         }
       );
+      event.target.disabled = true;
     } catch (error) {
       console.log(error.message);
     }

@@ -19,6 +19,10 @@
     align-items: center;
 }
 
+.singleRecipeContainer > p {
+    text-align: center;
+}
+
 .ingredientsContainer {
     display: flex;
     flex-direction: column;

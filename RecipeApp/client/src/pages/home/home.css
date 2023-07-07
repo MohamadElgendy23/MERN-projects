@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.homePageContainer > h1 {
+    font-family: sans-serif;
+}
+
 .recipesContainer {
     display: flex;
     flex-direction: column;
@@ -17,6 +21,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-style: dashed;
+    border-color: rgb(20, 74, 149);
+}
+
+.saveAndDeleteContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .ingredientsContainer {

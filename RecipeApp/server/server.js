@@ -13,9 +13,7 @@ app.use(
   })
 );
 
-require("dotenv").config({
-  path: "./mongoosedb/.env",
-});
+require("dotenv").config();
 
 mongoose.connect(process.env.MONGODB_CONN_STRING).then(() => {
   console.log("DATABASE IS UP AND RUNNING!");

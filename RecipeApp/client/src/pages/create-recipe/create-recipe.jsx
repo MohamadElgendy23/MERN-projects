@@ -14,7 +14,7 @@ export default function CreateRecipe() {
     instructions: "",
     imageUrl: "",
     cookingTime: 0,
-    userId: window.localStorage.getItem("userId"),
+    userId: localStorage.getItem("userId"),
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [cookies] = useCookies(["accessToken"]);
@@ -26,6 +26,7 @@ export default function CreateRecipe() {
       <NavBar></NavBar>
       <h2>Create Recipe</h2>
       <div className="createFormContainer">
+        <br />
         <label htmlFor="name">Name</label>
         <input
           id="name"

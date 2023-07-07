@@ -55,12 +55,19 @@ export default function Login() {
         username,
         password,
       });
-      setCookies("accessToken", accessTokenObj.data.accessToken);
-      window.localStorage.setItem("userId", accessTokenObj.data.userId);
+      setLoggedInUserInfo(
+        accessTokenObj.data.accessToken,
+        accessTokenObj.data.userId
+      );
       setSuccessMessage(`User ${username} logged in successfully`);
       setTimeout(() => navigate("/"), 1000);
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+  function setLoggedInUserInfo(accessToken, userId) {
+    setCookies("accessToken", accessToken);
+    localStorage.setItem("userId", userId);
   }
 }
