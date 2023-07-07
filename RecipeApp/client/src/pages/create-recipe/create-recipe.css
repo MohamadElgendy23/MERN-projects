@@ -15,6 +15,11 @@
     border-color: rgb(20, 74, 149);
 }
 
-.createFormContainer > input, textarea{
+.createFormContainer > input {
     text-align: center;
+}
+
+.createFormContainer > textarea {
+    text-align: center;
+    width: 200px;
 }
