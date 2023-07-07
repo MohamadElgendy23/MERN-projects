@@ -45,6 +45,7 @@ export default function Login() {
           Register
         </button>
         <h2>{successMessage || "Login user with above fields"}</h2>
+        <img src="	https://cdn0.iconfinder.com/data/icons/large-glossy-icons/512/User_login.png"></img>
       </div>
     </div>
   );
