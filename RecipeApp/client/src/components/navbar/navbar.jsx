@@ -29,7 +29,7 @@ export default function NavBar() {
         </li>
         <li>
           {cookies.accessToken ? (
-            <Link to="/register" onClick={handleUserRemove}>
+            <Link to="/register" onClick={() => setCookies("accessToken", "")}>
               Logout
             </Link>
           ) : (
@@ -39,8 +39,4 @@ export default function NavBar() {
       </ul>
     </div>
   );
-
-  function handleUserRemove() {
-    setCookies("accessToken", "");
-  }
 }
