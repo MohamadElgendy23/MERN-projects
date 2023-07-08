@@ -6,8 +6,10 @@ const jwt = require("jsonwebtoken");
 const Recipes = require("../models/recipes-models");
 const Users = require("../models/users-models");
 
+recipesRoutes.use(authorizeUser);
+
 //get all recipes for user
-recipesRoutes.get("/", authorizeUser, async (req, res) => {
+recipesRoutes.get("/", async (req, res) => {
   try {
     const requestingUserId = req.userId;
     const currentRecipes = await Recipes.find({ userId: requestingUserId });
@@ -18,7 +20,7 @@ recipesRoutes.get("/", authorizeUser, async (req, res) => {
 });
 
 //create new recipe
-recipesRoutes.post("/", authorizeUser, async (req, res) => {
+recipesRoutes.post("/", async (req, res) => {
   try {
     const requestingUserId = req.userId;
     const newRecipe = new Recipes({ ...req.body, userId: requestingUserId });
@@ -30,7 +32,7 @@ recipesRoutes.post("/", authorizeUser, async (req, res) => {
 });
 
 //delete a recipe
-recipesRoutes.delete("/delete/:recipeId/", authorizeUser, async (req, res) => {
+recipesRoutes.delete("/delete/:recipeId/", async (req, res) => {
   try {
     const requestingUserId = req.userId;
     const recipeId = req.params.recipeId;
@@ -45,7 +47,7 @@ recipesRoutes.delete("/delete/:recipeId/", authorizeUser, async (req, res) => {
 });
 
 //save a recipe
-recipesRoutes.put("/saveRecipe/", authorizeUser, async (req, res) => {
+recipesRoutes.put("/saveRecipe/", async (req, res) => {
   try {
     const requestingUserId = req.userId;
     const requestingUser = await Users.findById(requestingUserId);
@@ -63,7 +65,7 @@ recipesRoutes.put("/saveRecipe/", authorizeUser, async (req, res) => {
 });
 
 //gets the array of saved recipes objects
-recipesRoutes.get("/savedRecipes/", authorizeUser, async (req, res) => {
+recipesRoutes.get("/savedRecipes/", async (req, res) => {
   try {
     const requestingUserId = req.userId;
     const requestingUser = await Users.findById(requestingUserId);
@@ -77,7 +79,7 @@ recipesRoutes.get("/savedRecipes/", authorizeUser, async (req, res) => {
 });
 
 //gets the actual saved recipes array (saved recipe ids)
-recipesRoutes.get("/savedRecipes/ids/", authorizeUser, async (req, res) => {
+recipesRoutes.get("/savedRecipes/ids/", async (req, res) => {
   try {
     const requestingUserId = req.userId;
     const requestingUser = await Users.findById(requestingUserId);
