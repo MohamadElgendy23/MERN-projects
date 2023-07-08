@@ -17,6 +17,11 @@ export default function Home() {
         const userRecipesRes = await axios.get(baseURLGet, {
           headers: { authorization: `Bearer ${cookies.accessToken}` },
         });
+        setRecipes(
+          userRecipesRes.data.filter(
+            (recipe) => recipe.userId === localStorage.getItem("userId")
+          )
+        );
         setRecipes(userRecipesRes.data);
       } catch (error) {
         console.log(error.message);
