@@ -109,8 +109,7 @@ export default function Home() {
       await axios.put(
         baseURLPut,
         {
-          recipeId,
-          userId: localStorage.getItem("userId"),
+          recipeId: recipeId,
         },
         {
           headers: {

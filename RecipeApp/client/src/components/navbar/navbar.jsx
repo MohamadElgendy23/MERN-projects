@@ -42,6 +42,5 @@ export default function NavBar() {
 
   function handleUserRemove() {
     setCookies("accessToken", "");
-    localStorage.removeItem("userId");
   }
 }
