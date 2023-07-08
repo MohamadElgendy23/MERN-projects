@@ -43,7 +43,10 @@ export default function Register() {
           Login
         </button>
         <h2>{successMessage || "Register user with above fields"}</h2>
-        <img src="https://quicklaunch.io/wp-content/uploads/2019/10/user-registration.png"></img>
+        <img
+          src="https://quicklaunch.io/wp-content/uploads/2019/10/user-registration.png"
+          alt="user registration"
+        ></img>
       </div>
     </div>
   );

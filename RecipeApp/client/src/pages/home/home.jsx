@@ -5,7 +5,9 @@ import NavBar from "../../components/navbar/navbar";
 import axios from "axios";
 
 const baseURLGet = "http://localhost:4000/recipes/";
-const baseURLPut = "http://localhost:4000/recipes/";
+const baseURLPut = "http://localhost:4000/recipes/saveRecipe/";
+const baseURLIds = "http://localhost:4000/recipes/savedRecipes/ids";
+
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -17,11 +19,6 @@ export default function Home() {
         const userRecipesRes = await axios.get(baseURLGet, {
           headers: { authorization: `Bearer ${cookies.accessToken}` },
         });
-        setRecipes(
-          userRecipesRes.data.filter(
-            (recipe) => recipe.userId === localStorage.getItem("userId")
-          )
-        );
         setRecipes(userRecipesRes.data);
       } catch (error) {
         console.log(error.message);
@@ -29,9 +26,6 @@ export default function Home() {
     }
 
     async function getSavedRecipesIds() {
-      const baseURLIds = `http://localhost:4000/recipes/savedRecipes/ids/${localStorage.getItem(
-        "userId"
-      )}`;
       try {
         const savedRecipesRes = await axios.get(baseURLIds, {
           headers: {
@@ -94,14 +88,17 @@ export default function Home() {
   );
 
   async function deleteRecipe(recipeId) {
-    const baseURLDelete = `http://localhost:4000/recipes/delete/${recipeId.toString()}`;
+    const baseURLDelete = `http://localhost:4000/recipes/delete/${recipeId}`;
     try {
       const deleteRecipeRes = await axios.delete(baseURLDelete, {
         headers: {
           authorization: `Bearer ${cookies.accessToken}`,
         },
       });
-      setRecipes(deleteRecipeRes.data);
+      const deletedRecipeObj = deleteRecipeRes.data;
+      setRecipes((recipes) =>
+        recipes.filter((recipe) => recipe._id !== deletedRecipeObj._id)
+      );
     } catch (error) {
       console.log(error.message);
     }

@@ -56,7 +56,6 @@ export default function Login() {
         password,
       });
       setCookies("accessToken", accessTokenObj.data.accessToken);
-      localStorage.setItem("userId", accessTokenObj.data.userId);
       setSuccessMessage(`User ${username} logged in successfully`);
       setTimeout(() => navigate("/"), 1000);
     } catch (error) {

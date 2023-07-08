@@ -14,7 +14,6 @@ export default function CreateRecipe() {
     instructions: "",
     imageUrl: "",
     cookingTime: 0,
-    userId: localStorage.getItem("userId"),
   });
   const [successMessage, setSuccessMessage] = useState("");
   const [cookies] = useCookies(["accessToken"]);
@@ -99,7 +98,6 @@ export default function CreateRecipe() {
           instructions: recipe.instructions,
           imageUrl: recipe.imageUrl,
           cookingTime: recipe.cookingTime,
-          userId: recipe.userId,
         },
         {
           headers: {

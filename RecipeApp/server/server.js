@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -12,8 +14,6 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
-
-require("dotenv").config();
 
 mongoose.connect(process.env.MONGODB_CONN_STRING).then(() => {
   console.log("DATABASE IS UP AND RUNNING!");

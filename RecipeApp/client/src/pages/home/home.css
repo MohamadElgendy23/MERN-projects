@@ -14,6 +14,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 16px;
 }
 
 .singleRecipeContainer {
@@ -23,6 +24,7 @@
     align-items: center;
     border-style: dashed;
     border-color: rgb(20, 74, 149);
+    padding: 16px;
 }
 
 .saveAndDeleteContainer {

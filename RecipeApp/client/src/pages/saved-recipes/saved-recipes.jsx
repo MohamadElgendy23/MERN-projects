@@ -4,9 +4,7 @@ import { useCookies } from "react-cookie";
 import NavBar from "../../components/navbar/navbar";
 import axios from "axios";
 
-const baseURLGet = `http://localhost:4000/recipes/savedRecipes/${localStorage.getItem(
-  "userId"
-)}`;
+const baseURLGet = "http://localhost:4000/recipes/savedRecipes/";
 
 export default function SavedRecipes() {
   const [savedRecipes, setSavedRecipes] = useState([]);
