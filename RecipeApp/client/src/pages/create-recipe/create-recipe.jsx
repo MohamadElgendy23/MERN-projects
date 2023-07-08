@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import NavBar from "../../components/navbar/navbar";
 
 const baseURL = "http://localhost:4000/recipes/";
 
@@ -22,7 +21,6 @@ export default function CreateRecipe() {
 
   return (
     <div className="createRecipePageContainer">
-      <NavBar></NavBar>
       <h2>Create Recipe</h2>
       <div className="createFormContainer">
         <br />

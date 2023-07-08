@@ -6,22 +6,23 @@ import Login from "./pages/authentication/login/login";
 import CreateRecipe from "./pages/create-recipe/create-recipe";
 import SavedRecipes from "./pages/saved-recipes/saved-recipes";
 import NoPage from "./pages/NoPage(404)/NoPage";
+import NavBarLayout from "./layouts/navbarlayout/navbarlayout";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route element={<PageWithNavBar></PageWithNavBar>}>
-          <Route index="/" element={<Home></Home>} />
-          <Route
-            path="create-recipe/"
-            element={<CreateRecipe></CreateRecipe>}
-          />
-          <Route
-            path="saved-recipes/"
-            element={<SavedRecipes></SavedRecipes>}
-          />
+          <Route element={<NavBarLayout></NavBarLayout>}>
+            <Route index="/" element={<Home></Home>} />
+            <Route
+              path="create-recipe/"
+              element={<CreateRecipe></CreateRecipe>}
+            />
+            <Route
+              path="saved-recipes/"
+              element={<SavedRecipes></SavedRecipes>}
+            />
           </Route>
           <Route path="register/" element={<Register></Register>} />
           <Route path="login/" element={<Login></Login>} />

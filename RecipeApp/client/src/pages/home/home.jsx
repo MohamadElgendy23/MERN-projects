@@ -1,7 +1,6 @@
 import "./home.css";
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import NavBar from "../../components/navbar/navbar";
 import axios from "axios";
 
 const baseURLGet = "http://localhost:4000/recipes/";
@@ -44,7 +43,6 @@ export default function Home() {
 
   return (
     <div className="homePageContainer">
-      <NavBar></NavBar>
       <h1>Welcome to Recipes App!</h1>
       <h2>{recipes.length ? "Recipes" : "No Recipes To Display"}</h2>
       <div className="recipesContainer">

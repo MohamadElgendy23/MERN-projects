@@ -1,7 +1,6 @@
 import "./saved-recipes.css";
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import NavBar from "../../components/navbar/navbar";
 import axios from "axios";
 
 const baseURLGet = "http://localhost:4000/recipes/savedRecipes/";
@@ -27,7 +26,6 @@ export default function SavedRecipes() {
   }, []);
   return (
     <div className="savedRecipesPageContainer">
-      <NavBar></NavBar>
       <h1>Saved Recipes</h1>
       <h2>{!savedRecipes.length && "No Saved Recipes To Display"}</h2>
       <div className="savedRecipesContainer">
