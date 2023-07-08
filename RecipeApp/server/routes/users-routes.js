@@ -21,7 +21,7 @@ usersRoutes.post("/register/", async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new Users({ username, hashedPassword });
-    newUser.save();
+    //newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });

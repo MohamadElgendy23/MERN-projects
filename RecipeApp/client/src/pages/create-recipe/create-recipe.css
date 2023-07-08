@@ -11,8 +11,6 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border-style: dashed;
-    border-color: rgb(20, 74, 149);
 }
 
 .createFormContainer > input {

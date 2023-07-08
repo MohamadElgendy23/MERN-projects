@@ -6,10 +6,6 @@ import axios from "axios";
 
 const baseURLGet = "http://localhost:4000/recipes/";
 const baseURLPut = "http://localhost:4000/recipes/";
-const baseURLIds = `http://localhost:4000/recipes/savedRecipes/ids/${localStorage.getItem(
-  "userId"
-)}`;
-
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -28,6 +24,9 @@ export default function Home() {
     }
 
     async function getSavedRecipesIds() {
+      const baseURLIds = `http://localhost:4000/recipes/savedRecipes/ids/${localStorage.getItem(
+        "userId"
+      )}`;
       try {
         const savedRecipesRes = await axios.get(baseURLIds, {
           headers: {

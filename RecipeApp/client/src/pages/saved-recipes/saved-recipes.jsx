@@ -31,6 +31,7 @@ export default function SavedRecipes() {
     <div className="savedRecipesPageContainer">
       <NavBar></NavBar>
       <h1>Saved Recipes</h1>
+      <h2>{!savedRecipes.length && "No Saved Recipes To Display"}</h2>
       <div className="savedRecipesContainer">
         {savedRecipes.map((recipe) => {
           return (
