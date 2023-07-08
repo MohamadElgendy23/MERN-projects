@@ -12,6 +12,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route element={<PageWithNavBar></PageWithNavBar>}>
           <Route index="/" element={<Home></Home>} />
           <Route
             path="create-recipe/"
@@ -21,6 +22,7 @@ function App() {
             path="saved-recipes/"
             element={<SavedRecipes></SavedRecipes>}
           />
+          </Route>
           <Route path="register/" element={<Register></Register>} />
           <Route path="login/" element={<Login></Login>} />
           <Route path="*" element={<NoPage></NoPage>} />
