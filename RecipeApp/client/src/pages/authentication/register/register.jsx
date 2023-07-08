@@ -55,7 +55,7 @@ export default function Register() {
         password,
       });
       setSuccessMessage(`User ${username} registered successfully`);
-      setTimeout(() => navigate("/login/", 1000));
+      setTimeout(() => navigate("/login/"), 1000);
     } catch (error) {
       console.log(error.message);
     }

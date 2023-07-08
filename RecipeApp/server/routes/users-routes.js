@@ -16,12 +16,9 @@ usersRoutes.post("/register/", async (req, res) => {
         errorMessage: `User with username ${username} already exists!`,
       });
     }
-    if (!password.length) {
-      return res.status(403).json({ errorMessage: "Password cannot be empty" });
-    }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new Users({ username, hashedPassword });
-    //newUser.save();
+    const newUser = new Users({ username, password: hashedPassword });
+    await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ errorMessage: error.message });
