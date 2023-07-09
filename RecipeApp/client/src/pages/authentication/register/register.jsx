@@ -13,7 +13,7 @@ export default function Register() {
 
   return (
     <div className="registerPageContainer">
-      <h1>User Registration</h1>
+      <h1>Register User</h1>
       <div className="formContainer">
         <label htmlFor="usernameLabel">Username: </label>
         <input

@@ -49,21 +49,7 @@ export default function Home() {
         {recipes.map((recipe) => {
           return (
             <div className="singleRecipeContainer" key={recipe._id}>
-              <br />
-              <div className="saveAndDeleteContainer">
-                <button
-                  onClick={(event) => saveRecipe(event, recipe._id)}
-                  disabled={savedRecipes.includes(recipe._id)}
-                >
-                  {savedRecipes.includes(recipe._id)
-                    ? "Recipe Saved"
-                    : "Save Recipe"}
-                </button>
-                <button onClick={() => deleteRecipe(recipe._id)}>
-                  Delete Recipe
-                </button>
-              </div>
-              <h2>Name: {recipe.name}</h2>
+              <h3>Name: {recipe.name}</h3>
               <div className="ingredientsContainer">
                 {recipe.ingredients.map((ingredient, index) => {
                   return (
@@ -78,6 +64,19 @@ export default function Home() {
               <p>Instructions: {recipe.instructions}</p>
               <img src={recipe.imageUrl} alt={recipe.name}></img>
               <p>Cooking Time: {recipe.cookingTime} minutes</p>
+              <div className="saveAndDeleteContainer">
+                <button
+                  onClick={(event) => saveRecipe(event, recipe._id)}
+                  disabled={savedRecipes.includes(recipe._id)}
+                >
+                  {savedRecipes.includes(recipe._id)
+                    ? "Recipe Saved"
+                    : "Save Recipe"}
+                </button>
+                <button onClick={() => deleteRecipe(recipe._id)}>
+                  Delete Recipe
+                </button>
+              </div>
             </div>
           );
         })}

@@ -9,16 +9,20 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #739dca;
+    background-color: #e6eef7;
 }
 
-.navbarList > li {
+.navbarList li {
     float:left;
     display: block;
     text-align: center;
     padding: 14px 16px;
 }
 
-.navbarList > li :hover {
-    background-color: #69a478;
+.navbarList li :hover {
+    color: lightslategrey;
+}
+
+.navbarList li a {
+    color: black;
 }

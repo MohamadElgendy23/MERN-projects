@@ -22,7 +22,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-style: dashed;
+    border-style: groove;
     border-color: rgb(20, 74, 149);
     padding: 16px;
 }

@@ -15,7 +15,11 @@ export default function Login() {
 
   return (
     <div className="loginPageContainer">
-      <h1>User Login</h1>
+      <img
+        src="https://tse3.mm.bing.net/th?id=OIP.Z9MPb-mr_Soaz3u-MgNjPQHaHa&pid=Api&P=0&h=180"
+        alt="login icon"
+      ></img>
+      <h1>Login User</h1>
       <div className="formContainer">
         <label htmlFor="usernameLabel">Username: </label>
         <input
