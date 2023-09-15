@@ -17,4 +17,6 @@ ________________________________________________________________________________
 
 2. Memories : A visually appealing social media app where users can create posts serving as memories in their lives, like said posts, and other related things.
 
-   > Utilizes an API endpoint and fetches data using axios.
+   > Utilizes Material UI to make it easy to implement own custom design systems on top of its built in components.
+
+   > Fetches API data by the help of axios
