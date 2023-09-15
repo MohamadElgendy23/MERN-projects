@@ -1,3 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config({
+  path: "/.env",
+});
+
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -15,12 +20,13 @@ app.use(express.json());
 
 app.use("/posts", postsRoutes);
 
-const DB_URL =
-  "mongodb+srv://mohamadelgendy13:Solomon_23@cluster0.ylak97q.mongodb.net/";
 const PORT = process.env.PORT || 4000;
 
 mongoose
-  .connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() =>
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
