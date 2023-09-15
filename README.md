@@ -19,4 +19,4 @@ ________________________________________________________________________________
 
    > Utilizes Material UI to make it easy to implement own custom design systems on top of its built in components.
 
-   > Fetches API data by the help of axios
+   > Fetches API data by the help of Axios
