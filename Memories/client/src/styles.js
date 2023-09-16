@@ -9,14 +9,13 @@ export default makeStyles(() => ({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    height: "100px",
+    height: "85px",
   },
-  typography: { textAlign: "center", marginLeft: "100px" },
   heading: {
-    color: "rgba(0,183,255, 1)",
+    color: "black",
   },
   image: {
     marginLeft: "30px",
-    height: "75px",
+    height: "65px",
   },
 }));
